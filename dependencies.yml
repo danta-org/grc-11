@@ -1,9 +1,7 @@
 
 name: Generate Dependencies CSV
 
-on:
-  schedule:
-    - cron:  '*/5 * * * *'
+on: workflow_call
 
 jobs:
   generate-dependencies-csv:
