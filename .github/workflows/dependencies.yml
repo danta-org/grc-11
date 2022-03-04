@@ -1,7 +1,9 @@
 name: Generate Dependencies CSV
 
 on: workflow_call
-
+concurrency:
+  group: ${{ github.workflow }}
+  
 jobs:
   generate-dependencies-csv:
     runs-on: ubuntu-20.04
