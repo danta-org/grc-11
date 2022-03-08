@@ -15,7 +15,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: 'danta-org/grc-2'
-          token: ${{ secrets.GH_TOKEN_DEPENDENCIES }}
           path: 'grc-2-scripts'
       - name: Run script file
         run: |
