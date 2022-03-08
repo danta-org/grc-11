@@ -11,4 +11,4 @@ jobs:
               owner: context.repo.owner,
               repo: context.repo.repo
             })
-            console.log(context)
+            console.log(context.payload.repository.name)
