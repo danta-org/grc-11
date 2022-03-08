@@ -11,6 +11,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Checkout scripts
+        uses: actions/checkout@v2
+        with:
+          repository: 'danta-org/grc-2'
+          token: ${{ secrets.GH_TOKEN_DEPENDENCIES }}
+          path: 'grc-2-scripts'
+      - name: Run script file
+        run: |
+           chmod +x ./grc-2-scripts/test.sh
+           ./grc-2-scripts/test.sh
+        shell: bash
       - run: echo "REPOSITORY_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
         shell: bash
       - name: Generate dependencies action
