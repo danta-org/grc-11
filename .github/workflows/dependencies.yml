@@ -1,5 +1,5 @@
 name: Generate Dependencies CSV
-on: workflow_dispatch
+on: workflow_call
   
 concurrency:
   group: ${{ github.workflow }}
