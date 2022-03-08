@@ -7,7 +7,7 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            github.rest.codeScanning.listAlertsForRepo({
+            github.rest.repos.get({
               owner: context.repo.owner,
               repo: context.repo.repo
             })
