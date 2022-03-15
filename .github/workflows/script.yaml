@@ -7,8 +7,8 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            const repoinfo = github.rest.repos.get({
+            const result = await github.rest.repos.get({
               owner: context.repo.owner,
               repo: context.repo.repo
             })
-            console.log(repoinfo)
+            console.log(result)
