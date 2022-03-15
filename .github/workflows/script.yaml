@@ -17,10 +17,10 @@ jobs:
             const alerts = await github.paginate(result)
             console.log(alerts)
         
-        #let data = JSON.stringify(result, null, 2);
-        #fs.writeFileSync('repoinfo.json', data);
+            let data = JSON.stringify(alerts, null, 2);
+            fs.writeFileSync('alerts.json', data);
       
-      #- uses: actions/upload-artifact@v3
-      #  with:
-      #    name: repo-info
-      #    path: repoinfo.json
+      - uses: actions/upload-artifact@v3
+        with:
+          name: code-scan-alerts
+          path: alerts.json
