@@ -9,18 +9,11 @@ jobs:
           github-token: ${{ secrets.ORG_ADMIN_ACCESS_TOKEN }}
           script: |
             const fs = require('fs');
-            const result = github.rest.codeScanning.listAlertsForRepo.endpoint.merge({
+            const codeScanningResult = github.rest.codeScanning.listAlertsForRepo.endpoint.merge({
               owner: "symplr-sandbox",
               repo: "wfm-shs-application-test-scanning"
             })
             
-            const alerts = await github.paginate(result)
-            console.log(alerts)
-        
-            let data = JSON.stringify(alerts, null, 2);
-            fs.writeFileSync('alerts.json', data);
-      
-      - uses: actions/upload-artifact@v3
-        with:
-          name: code-scan-alerts
-          path: alerts.json
+            const codeScanningAlerts = await github.paginate(codeScanningResult)
+            console.log(codeScanningAlerts.length);
+
