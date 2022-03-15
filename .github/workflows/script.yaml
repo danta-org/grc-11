@@ -1,21 +1,26 @@
 on: workflow_dispatch
 
 jobs:
-  apply-label:
+  getalerts:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/github-script@v6
         with:
+          github-token: ${{ secrets.ORG_ADMIN_ACCESS_TOKEN }}
           script: |
             const fs = require('fs');
-            const result = await github.rest.repos.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo
+            const result = github.rest.codeScanning.listAlertsForRepo({
+              owner: "symplr-sandbox",
+              repo: "wfm-shs-application-test-scanning"
             })
-            console.log(result)
-            let data = JSON.stringify(result, null, 2);
-            fs.writeFileSync('repoinfo.json', data);
-      - uses: actions/upload-artifact@v3
-        with:
-          name: repo-info
-          path: repoinfo.json
+            
+            const alerts = await github.paginate(result)
+            console.log(alerts)
+        
+        #let data = JSON.stringify(result, null, 2);
+        #fs.writeFileSync('repoinfo.json', data);
+      
+      #- uses: actions/upload-artifact@v3
+      #  with:
+      #    name: repo-info
+      #    path: repoinfo.json
