@@ -12,9 +12,9 @@ jobs:
             const result = github.rest.codeScanning.listAlertsForRepo({
               owner: "symplr-sandbox",
               repo: "wfm-shs-application-test-scanning"
-            })
+            }, (response) => response.data)
             
-            const alerts = await github.paginate(result, (response) => response.data)
+            const alerts = await github.paginate(result)
             console.log(alerts)
         
         #let data = JSON.stringify(result, null, 2);
