@@ -13,7 +13,7 @@ jobs:
               repo: context.repo.repo
             })
             console.log(result)
-            let data = JSON.stringify(result);
+            let data = JSON.stringify(result, null, 2);
             fs.writeFileSync('repoinfo.json', data);
       - uses: actions/upload-artifact@v3
         with:
