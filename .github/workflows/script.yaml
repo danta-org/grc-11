@@ -9,10 +9,10 @@ jobs:
           github-token: ${{ secrets.ORG_ADMIN_ACCESS_TOKEN }}
           script: |
             const fs = require('fs');
-            const result = github.rest.codeScanning.listAlertsForRepo({
+            const result = github.rest.codeScanning.listAlertsForRepo.endpoint.merge({
               owner: "symplr-sandbox",
               repo: "wfm-shs-application-test-scanning"
-            }, (response) => response.data)
+            })
             
             const alerts = await github.paginate(result)
             console.log(alerts)
