@@ -8,17 +8,48 @@ jobs:
         with:
           github-token: ${{ secrets.ORG_ADMIN_ACCESS_TOKEN }}
           script: |
-            const fs = require('fs');
-            const codeScanningResult = github.rest.codeScanning.listAlertsForRepo.endpoint.merge({
-              owner: "symplr-sandbox",
-              repo: "wfm-shs-application-test-scanning"
-            })
+            const query =
+              `query ($org: String! $repo: String! $cursor: String){
+              repository(owner: $org name: $repo) {
+                name
+                dependencyGraphManifests(first: 100 after: $cursor) {
+                pageInfo {
+                  hasNextPage
+                  endCursor
+                }
+
+                nodes {
+                  dependenciesCount
+                  filename
+                  dependencies {
+                  nodes {
+                    packageManager
+                    packageName
+                    requirements
+                    hasDependencies
+                    repository {
+                      name
+                      owner {
+                        login
+                      }
+                      licenseInfo {
+                        name
+                        spdxId
+                        url
+                      }
+                    }
+                  }
+                  }
+                }
+                }
+              }
+            }`;
             
-            const codeScanningAlerts = await github.paginate(codeScanningResult)
-            var data = [{
-                  codescanning: codeScanningAlerts.length
-              }, {
-                  id: 2
-              }];
-            console.log(data);
+            const variables = {
+              owner: 'symplr-sandbox',
+              name: 'wfm-shs-application-test-scanning',
+              cursor: 'pagination'
+            }
+            getDepsResult = await github.graphql(query, variables)
+            console.log(getDepsResult)
 
