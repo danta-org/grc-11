@@ -41,5 +41,5 @@ jobs:
             }
             const getDepsResult = github.graphql(query, variables)
             const vulnerabilityAlertsAll = await github.paginate(getDepsResult)
-            console.log(getDepsResult.repository.pageInfo.hasNextPage)
+            console.log(getDepsResult.repository)
 
