@@ -39,6 +39,7 @@ jobs:
               repo: "wfm-shs-application-test-scanning",
               cursor: null
             }
-            getDepsResult = await github.graphql(query, variables)
-            console.log(getDepsResult)
+            getDepsResult = github.graphql(query, variables)
+            const vulnerabilityAlertsAll = await github.paginate(getDepsResult)
+            console.log(vulnerabilityAlertsAll)
 
