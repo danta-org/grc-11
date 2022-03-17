@@ -36,7 +36,7 @@ jobs:
             
             const variables = {
               org: "symplr-sandbox",
-              repo: "wfm-shs-application-test-scanning"
+              repo: "wfm-shs-application-test-scanning",
               cursor: null
             }
             getDepsResult = await github.graphql(query, variables)
