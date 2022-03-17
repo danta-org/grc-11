@@ -30,9 +30,8 @@ jobs:
                     }`;
             
             const variables = {
-              owner: 'symplr-sandbox',
-              name: 'wfm-shs-application-test-scanning',
-              cursor: 'pagination'
+              owner: "symplr-sandbox",
+              name: "wfm-shs-application-test-scanning"
             }
             getDepsResult = await github.graphql(query, variables)
             console.log(getDepsResult)
