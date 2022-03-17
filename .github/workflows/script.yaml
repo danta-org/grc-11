@@ -9,10 +9,10 @@ jobs:
           github-token: ${{ secrets.ORG_ADMIN_ACCESS_TOKEN }}
           script: |
             const query =
-              `query ($org: String! $repo: String! $cursor: String){
+              `query ($org: String! $repo: String!){
               repository(owner: $org name: $repo) {
                 name
-                vulnerabilityAlerts(first: 100 after: $cursor) {
+                vulnerabilityAlerts {
                   totalCount
                   nodes {
                     createdAt
@@ -36,8 +36,7 @@ jobs:
             
             const variables = {
               org: "symplr-sandbox",
-              repo: "wfm-shs-application-test-scanning",
-              cursor: null
+              repo: "wfm-shs-application-test-scanning"
             }
             const getDepsResult = await github.graphql(query, variables)
             console.log(getDepsResult.repository.vulnerabilityAlerts.pageInfo.hasNextPage)
