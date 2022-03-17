@@ -13,6 +13,7 @@ jobs:
               repository(owner: $org name: $repo) {
                 name
                 vulnerabilityAlerts(first: 100 after: $cursor) {
+                  totalCount
                   nodes {
                     createdAt
                     dismissedAt
@@ -28,7 +29,6 @@ jobs:
                   pageInfo {
                     endCursor
                     hasNextPage
-                    hasPreviousPage
                   }
                 }
                       }
@@ -41,5 +41,5 @@ jobs:
             }
             const getDepsResult = github.graphql(query, variables)
             const vulnerabilityAlertsAll = await github.paginate(getDepsResult)
-            console.log(vulnerabilityAlertsAll)
+            console.log(getDepsResult.repository.pageInfo.hasNextPage)
 
