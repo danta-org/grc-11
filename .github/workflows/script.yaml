@@ -9,7 +9,7 @@ jobs:
           github-token: ${{ secrets.ORG_ADMIN_ACCESS_TOKEN }}
           script: |
             const query =
-              `query ($org: String! $repo: String! $cursor String){
+              `query ($org: String! $repo: String! $cursor: String){
               repository(owner: $org name: $repo) {
                 name
                 vulnerabilityAlerts(first: 100 after: $cursor) {
