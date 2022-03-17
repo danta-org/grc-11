@@ -40,5 +40,5 @@ jobs:
               cursor: null
             }
             const getDepsResult = await github.graphql(query, variables)
-            console.log(getDepsResult.repository)
+            console.log(getDepsResult.repository.vulnerabilityAlerts.pageInfo.hasNextPage)
 
