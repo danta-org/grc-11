@@ -9,17 +9,25 @@ jobs:
           github-token: ${{ secrets.ORG_ADMIN_ACCESS_TOKEN }}
           script: |
             const query =
-              `query ($org: String! $repo: String! $cursor: String){
+              `query ($org: String! $repo: String!){
               repository(owner: $org name: $repo) {
                 name
-                RepositoryVulnerabilityAlert(first: 100) {
-                nodes {
-                  number
-                  securityVulnerability
+                vulnerabilityAlerts(first: 100) {
+                  nodes {
+                    createdAt
+                    dismissedAt
+                    securityVulnerability {
+                      package {
+                        name
+                      }
+                      advisory {
+                        description
+                      }
+                    }
+                  }
                 }
-                }
-              }
-            }`;
+                      }
+                    }`;
             
             const variables = {
               owner: 'symplr-sandbox',
