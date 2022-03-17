@@ -12,12 +12,7 @@ jobs:
               `query ($org: String! $repo: String! $cursor: String){
               repository(owner: $org name: $repo) {
                 name
-                RepositoryVulnerabilityAlert(first: 100 after: $cursor) {
-                pageInfo {
-                  hasNextPage
-                  endCursor
-                }
-
+                RepositoryVulnerabilityAlert(first: 100) {
                 nodes {
                   number
                   securityVulnerability
