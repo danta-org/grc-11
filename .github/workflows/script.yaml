@@ -12,34 +12,15 @@ jobs:
               `query ($org: String! $repo: String! $cursor: String){
               repository(owner: $org name: $repo) {
                 name
-                dependencyGraphManifests(first: 100 after: $cursor) {
+                RepositoryVulnerabilityAlert(first: 100 after: $cursor) {
                 pageInfo {
                   hasNextPage
                   endCursor
                 }
 
                 nodes {
-                  dependenciesCount
-                  filename
-                  dependencies {
-                  nodes {
-                    packageManager
-                    packageName
-                    requirements
-                    hasDependencies
-                    repository {
-                      name
-                      owner {
-                        login
-                      }
-                      licenseInfo {
-                        name
-                        spdxId
-                        url
-                      }
-                    }
-                  }
-                  }
+                  number
+                  securityVulnerability
                 }
                 }
               }
