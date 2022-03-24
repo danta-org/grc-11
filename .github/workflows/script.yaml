@@ -8,36 +8,15 @@ jobs:
         with:
           github-token: ${{ secrets.ORG_ADMIN_ACCESS_TOKEN }}
           script: |
-            const query =
-              `query ($org: String! $repo: String!){
-              repository(owner: $org name: $repo) {
-                name
-                vulnerabilityAlerts {
-                  totalCount
-                  nodes {
-                    createdAt
-                    dismissedAt
-                    securityVulnerability {
-                      package {
-                        name
-                      }
-                      advisory {
-                        description
-                      }
-                    }
-                  }
-                  pageInfo {
-                    endCursor
-                    hasNextPage
-                  }
-                }
-                      }
-                    }`;
+            const fs = require('fs');
             
-            const variables = {
+            const codeScanningResult = github.rest.secretScanning.listAlertsForOrg.endpoint.merge({
               org: "symplr-sandbox",
-              repo: "wfm-shs-application-test-scanning"
-            }
-            const getDepsResult = await github.graphql(query, variables)
-            console.log(getDepsResult.repository.vulnerabilityAlerts.pageInfo.hasNextPage)
-
+            })
+            const codeScanningAlerts = await github.paginate(codeScanningResult)
+            let codeScanningData = JSON.stringify(codeScanningAlerts, null, 2);
+            fs.writeFileSync('artifacts/code-scan-alerts.json', codeScanningData);
+      - uses: actions/upload-artifact@v3
+        with:
+          name: security-alerts
+          path: artifacts/
