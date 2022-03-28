@@ -7,6 +7,7 @@ jobs:
       - uses: danta-org/scan-stats@v2
         with:
           githubtoken: ${{ secrets.ORG_ADMIN_ACCESS_TOKEN }}
+          org: symplr-sandbox
       - uses: actions/upload-artifact@v3
         with:
           name: security-alerts
