@@ -16,6 +16,8 @@ jobs:
         run: |
           git config --local user.email "dta@symplr.com"
           git config --local user.name "GitHub Action"
+          git add code-scan.json
+          git add secret-scan.json
           git commit -m "Add changes" -a
       - name: GitHub Push
         uses: ad-m/github-push-action@v0.6.0
