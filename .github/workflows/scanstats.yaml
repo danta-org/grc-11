@@ -10,6 +10,8 @@ jobs:
           org: symplr-sandbox
       - name: GitHub Push
         uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/upload-artifact@v3
         with:
           name: security-alerts
