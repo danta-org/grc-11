@@ -1,0 +1,13 @@
+on: workflow_dispatch
+
+jobs:
+  scanaction:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: danta-org/scan-stats@v1
+        with:
+          githubtoken: ${{ secrets.ORG_ADMIN_ACCESS_TOKEN }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: security-alerts
+          path: data/
