@@ -4,11 +4,11 @@ jobs:
   scanaction:
     runs-on: ubuntu-latest
     steps:
-      - uses: danta-org/scan-stats@v2
+      - uses: danta-org/scan-stats@v3
         with:
           githubtoken: ${{ secrets.ORG_ADMIN_ACCESS_TOKEN }}
           org: symplr-sandbox
       - uses: actions/upload-artifact@v3
         with:
           name: security-alerts
-          path: data/
+          path: ./
