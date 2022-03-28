@@ -4,7 +4,7 @@ jobs:
   scanaction:
     runs-on: ubuntu-latest
     steps:
-      - uses: danta-org/scan-stats@v1
+      - uses: danta-org/scan-stats@v2
         with:
           githubtoken: ${{ secrets.ORG_ADMIN_ACCESS_TOKEN }}
       - uses: actions/upload-artifact@v3
